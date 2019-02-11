@@ -17,7 +17,7 @@ export class StartFetchUsers implements Action {
 export class SuccessFetchUser implements Action {
   readonly type = UsersActionTypes.SuccessFetchUser;
 
-  constructor(public payload: User[]) {
+  constructor(public payload: { users: User[] }) {
   }
 }
 

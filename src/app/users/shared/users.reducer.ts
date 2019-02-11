@@ -22,7 +22,7 @@ export function reducer(state = initialState, action: UsersActions): State {
     case UsersActionTypes.StartFetchUsers:
       return { ...state, loading: true };
     case UsersActionTypes.SuccessFetchUser:
-      return { ...state, users: action.payload };
+      return { ...state, users: action.payload.users };
     case UsersActionTypes.FinishFetchUsers:
       return { ...state, loading: false };
     default:
