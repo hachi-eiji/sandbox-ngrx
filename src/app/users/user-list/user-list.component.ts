@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { User } from '../../models/user';
-import * as UserActions from '../shared/users.action';
-import * as userReducer from '../shared/users.reducer';
-import { UsersService } from '../shared/users.service';
+import { UsersFacade } from '../shared/users.facade';
 
 @Component({
   selector: 'app-user-list',
@@ -12,21 +7,16 @@ import { UsersService } from '../shared/users.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  users$: Observable<User[]> | null = null;
-  loading$: Observable<boolean> | null = null;
+  users$ = this.usersFacade.users$;
+  loading$ = this.usersFacade.loading$;
 
-  constructor(
-    private usersService: UsersService,
-    private store: Store<userReducer.State>
-  ) {
-    this.loading$ = this.store.pipe(select(userReducer.getLoading));
-    this.users$ = this.store.pipe(select(userReducer.getUsers));
+  constructor(private usersFacade: UsersFacade) {
   }
 
   ngOnInit() {
   }
 
   fetchUser() {
-    this.store.dispatch(new UserActions.StartFetchUsers());
+    this.usersFacade.fetchUser();
   }
 }
