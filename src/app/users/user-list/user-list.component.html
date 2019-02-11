@@ -1,3 +1,7 @@
+<button (click)="fetchUser()">ユーザを取得</button>
+<ng-container *ngIf="(loading$ | async) as loading;">
+  loading...
+</ng-container>
 <ul>
   <li *ngFor="let user of (users$ | async)">
     {{user.id}} is {{user.name}}
