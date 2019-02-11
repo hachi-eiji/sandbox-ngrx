@@ -15,6 +15,7 @@ export class UsersService {
   }
 
   fetchUsers(): Observable<User[]> {
+    // return this.httpClient.get<User[]>('/api/error', { headers: UsersService.httpHeaders() });
     return this.httpClient.get<User[]>('/api/users', { headers: UsersService.httpHeaders() });
   }
 }

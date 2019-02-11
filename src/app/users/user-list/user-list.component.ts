@@ -9,6 +9,7 @@ import { UsersFacade } from '../shared/users.facade';
 export class UserListComponent implements OnInit {
   users$ = this.usersFacade.users$;
   loading$ = this.usersFacade.loading$;
+  error$ = this.usersFacade.error$;
 
   constructor(private usersFacade: UsersFacade) {
   }

@@ -4,7 +4,8 @@ import { User } from '../../models/user';
 export enum UsersActionTypes {
   StartFetchUsers = '[Users] Start Fetch Users',
   SuccessFetchUser = '[Users API] Success Fetch Users',
-  FinishFetchUsers = '[Users] Finish Fetch Users'
+  FinishFetchUsers = '[Users] Finish Fetch Users',
+  Error = '[Users] Error'
 }
 
 export class StartFetchUsers implements Action {
@@ -28,8 +29,16 @@ export class FinishFetchUsers implements Action {
   }
 }
 
+export class Error implements Action {
+  readonly type = UsersActionTypes.Error;
+
+  constructor(readonly payload: { error: any }) {
+  }
+}
+
 export type UsersActions =
   StartFetchUsers
   | SuccessFetchUser
   | FinishFetchUsers
+  | Error
   ;

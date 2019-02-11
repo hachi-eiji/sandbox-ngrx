@@ -9,6 +9,7 @@ import { UsersService } from './users.service';
 export class UsersFacade {
   loading$ = this.store.pipe(select(userReducer.getLoading));
   users$ = this.store.pipe(select(userReducer.getUsers));
+  error$ = this.store.pipe(select(userReducer.error));
 
   constructor(
     private store: Store<userReducer.State>,
@@ -18,6 +19,10 @@ export class UsersFacade {
   fetchUser() {
     this.store.dispatch(new UserActions.StartFetchUsers());
     this.usersService.fetchUsers()
-    .subscribe(users => this.store.dispatch(new UserActions.SuccessFetchUser({ users })));
+    .subscribe(
+      users => this.store.dispatch(new UserActions.SuccessFetchUser({ users })),
+      error => this.store.dispatch(new UserActions.Error({ error })),
+      () => this.store.dispatch(new UserActions.FinishFetchUsers())
+    );
   }
 }
