@@ -1,11 +1,15 @@
 <button (click)="fetchUser()">ユーザを取得</button>
-<div *ngIf="(loading$ | async)"> loading...</div>
-<div *ngIf="(error$ | async)">エラーだよ</div>
-<ul>
-  <li *ngFor="let user of (users$ | async)">
-    {{user.id}} is {{user.name}}
-  </li>
-</ul>
-<input type="number" [(ngModel)]="updateId">
-<input type="text" [(ngModel)]="updateName">
-<button type="button" (click)="updateUserName()">ユーザ名更新</button>
+<ng-container *ngIf="state$ | async as state">
+  <div *ngIf="state.loading"> loading...</div>
+  <div *ngIf="state.error">エラーだよ</div>
+  <ng-container *ngIf="state.users as users">
+    <ul>
+      <li *ngFor="let user of users">
+        {{user.id}} is {{user.name}}
+      </li>
+    </ul>
+    <input type="number" [(ngModel)]="updateId">
+    <input type="text" [(ngModel)]="updateName">
+    <button type="button" (click)="updateUserName()">ユーザ名更新</button>
+  </ng-container>
+</ng-container>

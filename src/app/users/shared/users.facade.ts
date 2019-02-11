@@ -7,9 +7,7 @@ import { UsersService } from './users.service';
 
 @Injectable()
 export class UsersFacade {
-  loading$ = this.store.pipe(select(userReducer.getLoading));
-  users$ = this.store.pipe(select(userReducer.getUsers));
-  error$ = this.store.pipe(select(userReducer.error));
+  state$ = this.store.pipe(select(userReducer.getState));
 
   constructor(
     private store: Store<userReducer.State>,

@@ -7,9 +7,7 @@ import { UsersFacade } from '../shared/users.facade';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  users$ = this.usersFacade.users$;
-  loading$ = this.usersFacade.loading$;
-  error$ = this.usersFacade.error$;
+  state$ = this.usersFacade.state$;
 
   updateId: number;
   updateName: string;

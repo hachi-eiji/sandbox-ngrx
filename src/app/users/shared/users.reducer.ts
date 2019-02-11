@@ -15,9 +15,7 @@ export const initialState: State = {
 };
 
 const usersFeature = createFeatureSelector<State>('users');
-export const getLoading = createSelector(usersFeature, (state: State) => state.loading);
-export const getUsers = createSelector(usersFeature, (state: State) => state.users);
-export const error = createSelector(usersFeature, (state: State) => state.error);
+export const getState = createSelector(usersFeature, (state: State) => state);
 
 export function reducer(state = initialState, action: UsersActions): State {
   switch (action.type) {
