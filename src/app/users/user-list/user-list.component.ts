@@ -12,7 +12,7 @@ import { UsersService } from '../shared/users.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  users$: Observable<User[]>;
+  users$: Observable<User[]> | null = null;
   loading$: Observable<boolean> | null = null;
 
   constructor(
@@ -20,6 +20,7 @@ export class UserListComponent implements OnInit {
     private store: Store<userReducer.State>
   ) {
     this.loading$ = this.store.pipe(select(userReducer.getLoading));
+    this.users$ = this.store.pipe(select(userReducer.getUsers));
   }
 
   ngOnInit() {
@@ -27,9 +28,5 @@ export class UserListComponent implements OnInit {
 
   fetchUser() {
     this.store.dispatch(new UserActions.StartFetchUsers());
-    setTimeout(() => {
-      this.store.dispatch(new UserActions.FinishFetchUsers());
-    }, 10000);
-    // this.users$ = this.usersService.fetchUsers();
   }
 }

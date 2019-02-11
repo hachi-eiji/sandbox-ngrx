@@ -14,11 +14,15 @@ export const initialState: State = {
 
 const usersFeature = createFeatureSelector<State>('users');
 export const getLoading = createSelector(usersFeature, (state: State) => state.loading);
+export const getUsers = createSelector(usersFeature, (state: State) => state.users);
 
 export function reducer(state = initialState, action: UsersActions): State {
+  console.log('reducer', action.type);
   switch (action.type) {
     case UsersActionTypes.StartFetchUsers:
       return { ...state, loading: true };
+    case UsersActionTypes.SuccessFetchUser:
+      return { ...state, users: action.payload };
     case UsersActionTypes.FinishFetchUsers:
       return { ...state, loading: false };
     default:
