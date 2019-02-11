@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { AppEffects } from './app.effects';
 import { InMemoryUserService } from './mocks/in-memory-user.service';
 import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { reducers, metaReducers } from './reducers';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryUserService, { delay: 500, apiBase: 'api/' }),
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([AppEffects])
+    EffectsModule.forRoot([AppEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
