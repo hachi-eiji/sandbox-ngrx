@@ -9,7 +9,7 @@ export class InMemoryUserService implements InMemoryDbService {
   constructor() {
   }
 
-  private static getUsers(): Array<User> {
+  private static getUsers(): User[] {
     return [
       { id: 1, name: 'mike' },
       { id: 2, name: 'bob' },

@@ -19,7 +19,7 @@ import { reducers, metaReducers } from './reducers';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryUserService, { delay: 500 }),
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryUserService, { delay: 500, apiBase: 'api/' }),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([AppEffects])
   ],
