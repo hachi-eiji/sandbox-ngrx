@@ -25,4 +25,14 @@ export class UsersFacade {
       () => this.store.dispatch(new UserActions.FinishFetchUsers())
     );
   }
+
+  updateUserName(id: number, name: string) {
+    this.store.dispatch(new UserActions.StartFetchUsers());
+    this.usersService.updateUser({ id, name })
+    .subscribe(
+      () => this.store.dispatch(new UserActions.UpdateUserName({ user: { id, name } })),
+      error => this.store.dispatch(new UserActions.Error({ error })),
+      () => this.store.dispatch(new UserActions.FinishFetchUsers())
+    );
+  }
 }

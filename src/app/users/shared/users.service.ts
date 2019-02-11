@@ -18,4 +18,8 @@ export class UsersService {
     // return this.httpClient.get<User[]>('/api/error', { headers: UsersService.httpHeaders() });
     return this.httpClient.get<User[]>('/api/users', { headers: UsersService.httpHeaders() });
   }
+
+  updateUser(user: User): Observable<any> {
+    return this.httpClient.post(`/api/users/${user.id}`, { name: user.name });
+  }
 }

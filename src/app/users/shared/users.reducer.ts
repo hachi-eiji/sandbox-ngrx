@@ -27,6 +27,14 @@ export function reducer(state = initialState, action: UsersActions): State {
       return { ...state, users: action.payload.users };
     case UsersActionTypes.FinishFetchUsers:
       return { ...state, loading: false };
+    case UsersActionTypes.UpdateUserName:
+      const users = state.users.map((user) => {
+        if (user.id !== action.payload.user.id) {
+          return user;
+        }
+        return action.payload.user;
+      });
+      return { ...state, users };
     case UsersActionTypes.Error:
       return { users: initialState.users, loading: false, error: action.payload.error };
     default:

@@ -6,3 +6,6 @@
     {{user.id}} is {{user.name}}
   </li>
 </ul>
+<input type="number" [(ngModel)]="updateId">
+<input type="text" [(ngModel)]="updateName">
+<button type="button" (click)="updateUserName()">ユーザ名更新</button>

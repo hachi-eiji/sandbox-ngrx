@@ -11,6 +11,9 @@ export class UserListComponent implements OnInit {
   loading$ = this.usersFacade.loading$;
   error$ = this.usersFacade.error$;
 
+  updateId: number;
+  updateName: string;
+
   constructor(private usersFacade: UsersFacade) {
   }
 
@@ -19,5 +22,9 @@ export class UserListComponent implements OnInit {
 
   fetchUser() {
     this.usersFacade.fetchUser();
+  }
+
+  updateUserName() {
+    this.usersFacade.updateUserName(+this.updateId, this.updateName);
   }
 }
