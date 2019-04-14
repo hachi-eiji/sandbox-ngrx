@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { User } from '../../models/user';
-import { UsersActionTypes, UserActionUnion, startFetchUsers, UsersActions, successFetchUsers } from './users.action';
+import { UserActionUnion, startFetchUsers, successFetchUsers, finishFetchUsers, error, updateUserName } from './users.action';
 
 export interface State {
   users: Array<User>;
@@ -17,15 +17,15 @@ export const initialState: State = {
 const usersFeature = createFeatureSelector<State>('users');
 export const getState = createSelector(usersFeature, (state: State) => state);
 
-export function reducer(state = initialState, action: UsersActions | UserActionUnion): State {
+export function reducer(state = initialState, action: UserActionUnion): State {
   switch (action.type) {
     case startFetchUsers.type:
       return { ...state, loading: true };
     case successFetchUsers.type:
       return { ...state, users: action.payload.users };
-    case UsersActionTypes.FinishFetchUsers:
+    case finishFetchUsers.type:
       return { ...state, loading: false };
-    case UsersActionTypes.UpdateUserName:
+    case updateUserName.type:
       const users = state.users.map((user) => {
         if (user.id !== action.payload.user.id) {
           return user;
@@ -33,7 +33,7 @@ export function reducer(state = initialState, action: UsersActions | UserActionU
         return action.payload.user;
       });
       return { ...state, users };
-    case UsersActionTypes.Error:
+    case error.type:
       return { users: initialState.users, loading: false, error: action.payload.error };
     default:
       return state;
