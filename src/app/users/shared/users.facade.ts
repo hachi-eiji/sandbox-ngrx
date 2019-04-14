@@ -18,7 +18,7 @@ export class UsersFacade {
     this.store.dispatch(UserActions.startFetchUsers());
     this.usersService.fetchUsers()
     .subscribe(
-      users => this.store.dispatch(new UserActions.SuccessFetchUser({ users })),
+      users => this.store.dispatch(UserActions.successFetchUsers({ users })),
       error => this.store.dispatch(new UserActions.Error({ error })),
       () => this.store.dispatch(new UserActions.FinishFetchUsers())
     );
