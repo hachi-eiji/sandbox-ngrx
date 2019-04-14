@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { User } from '../../models/user';
-import { UsersActions, UsersActionTypes } from './users.action';
+import { UsersActionTypes, UserActionUnion, startFetchUsers, UsersActions } from './users.action';
 
 export interface State {
   users: Array<User>;
@@ -17,9 +17,9 @@ export const initialState: State = {
 const usersFeature = createFeatureSelector<State>('users');
 export const getState = createSelector(usersFeature, (state: State) => state);
 
-export function reducer(state = initialState, action: UsersActions): State {
+export function reducer(state = initialState, action: UsersActions | UserActionUnion): State {
   switch (action.type) {
-    case UsersActionTypes.StartFetchUsers:
+    case startFetchUsers.type:
       return { ...state, loading: true };
     case UsersActionTypes.SuccessFetchUser:
       return { ...state, users: action.payload.users };

@@ -1,19 +1,11 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, union } from '@ngrx/store';
 import { User } from '../../models/user';
 
 export enum UsersActionTypes {
-  StartFetchUsers = '[Users] Start Fetch Users',
   SuccessFetchUser = '[Users API] Success Fetch Users',
   FinishFetchUsers = '[Users] Finish Fetch Users',
   Error = '[Users] Error',
   UpdateUserName = '[Users API] Update User Name',
-}
-
-export class StartFetchUsers implements Action {
-  readonly type = UsersActionTypes.StartFetchUsers;
-
-  constructor() {
-  }
 }
 
 export class SuccessFetchUser implements Action {
@@ -45,9 +37,20 @@ export class UpdateUserName implements Action {
 }
 
 export type UsersActions =
-  StartFetchUsers
   | SuccessFetchUser
   | FinishFetchUsers
   | Error
   | UpdateUserName
   ;
+
+
+export const startFetchUsers = createAction(
+  '[Users] Start Fetch Users'
+);
+
+const actions = union({
+  startFetchUsers,
+});
+
+export type UserActionUnion = typeof actions;
+

@@ -15,7 +15,7 @@ export class UsersFacade {
   }
 
   fetchUser() {
-    this.store.dispatch(new UserActions.StartFetchUsers());
+    this.store.dispatch(UserActions.startFetchUsers());
     this.usersService.fetchUsers()
     .subscribe(
       users => this.store.dispatch(new UserActions.SuccessFetchUser({ users })),
@@ -25,7 +25,7 @@ export class UsersFacade {
   }
 
   updateUserName(id: number, name: string) {
-    this.store.dispatch(new UserActions.StartFetchUsers());
+    this.store.dispatch(UserActions.startFetchUsers());
     this.usersService.updateUser({ id, name })
     .subscribe(
       () => this.store.dispatch(new UserActions.UpdateUserName({ user: { id, name } })),
