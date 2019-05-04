@@ -1,3 +1,3 @@
 # SandboxNgrx
 
-Sandbox for [NgRx](https://ngrx.io/)
+Sandbox of [NgRx](https://ngrx.io/)
