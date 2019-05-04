@@ -15,22 +15,22 @@ export class UsersFacade {
   }
 
   fetchUser() {
-    this.store.dispatch(UserActions.startFetchUsers());
+    this.store.dispatch(new UserActions.StartFetchUsers());
     this.usersService.fetchUsers()
     .subscribe(
-      users => this.store.dispatch(UserActions.successFetchUsers({ users })),
-      error => this.store.dispatch(UserActions.error({ error })),
-      () => this.store.dispatch(UserActions.finishFetchUsers())
+      users => this.store.dispatch(new UserActions.SuccessFetchUser({ users })),
+      error => this.store.dispatch(new UserActions.Error({ error })),
+      () => this.store.dispatch(new UserActions.FinishFetchUsers())
     );
   }
 
   updateUserName(id: number, name: string) {
-    this.store.dispatch(UserActions.startFetchUsers());
+    this.store.dispatch(new UserActions.StartFetchUsers());
     this.usersService.updateUser({ id, name })
     .subscribe(
-      () => this.store.dispatch(UserActions.updateUserName({ user: { id, name } })),
-      error => this.store.dispatch(UserActions.error({ error })),
-      () => this.store.dispatch(UserActions.finishFetchUsers())
+      () => this.store.dispatch(new UserActions.UpdateUserName({ user: { id, name } })),
+      error => this.store.dispatch(new UserActions.Error({ error })),
+      () => this.store.dispatch(new UserActions.FinishFetchUsers())
     );
   }
 }

@@ -1,38 +1,53 @@
-import { createAction, union } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { User } from '../../models/user';
 
-export const startFetchUsers = createAction(
-  '[Users] Start Fetch Users'
-);
+export enum UsersActionTypes {
+  StartFetchUsers = '[Users] Start Fetch Users',
+  SuccessFetchUser = '[Users API] Success Fetch Users',
+  FinishFetchUsers = '[Users] Finish Fetch Users',
+  Error = '[Users] Error',
+  UpdateUserName = '[Users API] Update User Name',
+}
 
-// creatorを渡している
-export const successFetchUsers = createAction(
-  '[Users API] Success Fetch Users',
-  (payload: { users: User[] }) => ({ payload })
-);
+export class StartFetchUsers implements Action {
+  readonly type = UsersActionTypes.StartFetchUsers;
 
-export const finishFetchUsers = createAction(
-  '[Users] Finish Fetch Users'
-);
+  constructor() {
+  }
+}
 
-export const error = createAction(
-  '[Users] Error',
-  (payload: { error: any }) => ({ payload })
-);
+export class SuccessFetchUser implements Action {
+  readonly type = UsersActionTypes.SuccessFetchUser;
 
-export const updateUserName = createAction(
-  '[Users API] Update User Name',
-  (payload: { user: User }) => ({ payload })
-  )
-;
+  constructor(public payload: { users: User[] }) {
+  }
+}
 
-const actions = union({
-  startFetchUsers,
-  successFetchUsers,
-  finishFetchUsers,
-  error,
-  updateUserName
-});
+export class FinishFetchUsers implements Action {
+  readonly type = UsersActionTypes.FinishFetchUsers;
 
-export type UserActionUnion = typeof actions;
+  constructor() {
+  }
+}
 
+export class Error implements Action {
+  readonly type = UsersActionTypes.Error;
+
+  constructor(readonly payload: { error: any }) {
+  }
+}
+
+export class UpdateUserName implements Action {
+  readonly type = UsersActionTypes.UpdateUserName;
+
+  constructor(readonly payload: { user: User }) {
+  }
+}
+
+export type UsersActions =
+  StartFetchUsers
+  | SuccessFetchUser
+  | FinishFetchUsers
+  | Error
+  | UpdateUserName
+  ;
